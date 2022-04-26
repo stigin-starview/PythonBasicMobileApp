@@ -3,32 +3,54 @@
         cols: 1
         GridLayout:
             cols: 1
+            padding: 15, 15
+            spacing: 20, 20
             Label:
                 text: "User Login"
+                font_size: "25sp"
             TextInput:
                 id: username
                 hint_text: "User name"
             TextInput:
                 id: password
+                password: True
                 hint_text: "Password"
-            Button:
-                text: "Login"
-                on_press: root.login(root.ids.username.text, root.ids.password.text)
+            RelativeLayout:
+                Button:
+                    text: "Login"
+                    on_press: root.login(root.ids.username.text, root.ids.password.text)
+                    size_hint: 0.3, 0.8
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.6}
             Label:
                 id: labelLoginError
                 text: ""
         GridLayout:
             cols: 2
+            size_hint: 0.2,0.2
+            padding: 10, 10
+            spacing: 10, 0
             Button:
                 text: " Forgot password"
+                on_press: root.forgotPassword()
+                #rgb and last value is for trasparency
+                background_color: 1, 1, 1, 0
+                #when clicked
+                opacity: 1 if self.state == 'normal' else 0.5
             Button:
                 text: "Sign up"
                 on_press: root.signUp()
+                #rgb and last value is for trasparency
+                background_color: 1, 1, 1, 0
+                #when clicked
+                opacity: 1 if self.state == 'normal' else 0.5
 
 <SignupScreen>:
     GridLayout:
         cols: 1
+        padding: 20, 20
+        spacing: 20, 20
         Label:
+            font_size: "25sp"
             text: "Sign up"
         TextInput:
             id: username
@@ -36,9 +58,12 @@
         TextInput:
             id: password
             hint_text: "password"
-        Button:
-            text: "Submit"
-            on_press: root.addUser(root.ids.username.text, root.ids.password.text)
+        RelativeLayout:    
+            Button:
+                text: "Submit"
+                on_press: root.addUser(root.ids.username.text, root.ids.password.text)
+                size_hint: 0.3, 0.8
+                pos_hint: {'center_x': 0.5, 'center_y': 0.6}
 
 <SignupSuccessScreen>:
     GridLayout:
@@ -52,9 +77,15 @@
 <LoginSuccessScreen>:
     GridLayout:
         cols: 1
-        Button:
-            text: "Logout"
-            on_press: root.logout()
+        padding: 30, 30
+        spacing: 30, 30
+        RelativeLayout:
+            ImageButton:
+                on_press: root.logout()
+                source: 'resources/logout_hover.png' if self.hovered else 'resources/logout_nothover.png'
+                size_hint: 0.5, 0.35
+                pos_hint: {'center_x': 0.93, 'center_y': 0.8}
+
 
         Label:
             text: "How do you feel?"
@@ -64,9 +95,13 @@
         Button:
             text: "Press me"
             on_press: root.getQuote(root.ids.userInput.text)
-        Label:
-            id: labelQuote
-            text: ""
+        ScrollView:
+            Label:
+                id: labelQuote
+                text: ""
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
 
 
 <RootWidget>

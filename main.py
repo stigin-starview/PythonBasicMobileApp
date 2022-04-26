@@ -10,6 +10,9 @@ import glob
 from pathlib import Path
 import random
 from matplotlib.style import available
+from resources.hoverable import HoverBehavior
+from kivy.uix.image import Image
+from kivy.uix.behaviors import ButtonBehavior
 
 
 Builder.load_file('design.kv')
@@ -27,6 +30,9 @@ class LoginScreen(Screen):
             self.manager.current= "Login_Success_Screen"
         else:
             self.ids.labelLoginError.text = "Incorrect username or password"
+    
+    def forgotPassword(self):
+        self.ids.labelLoginError.text= "I don't see how that's my problem"
 
 
 
@@ -67,6 +73,9 @@ class LoginSuccessScreen(Screen):
                 self.ids.labelQuote.text = random.choice(quotes)
         else:
             self.ids.labelQuote.text = "Try another feeling O.O"
+
+class ImageButton(ButtonBehavior, HoverBehavior, Image):
+    pass
     
 class RootWidget(ScreenManager):
     pass
