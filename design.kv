@@ -6,11 +6,17 @@
             Label:
                 text: "User Login"
             TextInput:
+                id: username
                 hint_text: "User name"
             TextInput:
+                id: password
                 hint_text: "Password"
             Button:
-                text: "Login"  
+                text: "Login"
+                on_press: root.login(root.ids.username.text, root.ids.password.text)
+            Label:
+                id: labelLoginError
+                text: ""
         GridLayout:
             cols: 2
             Button:
@@ -19,7 +25,7 @@
                 text: "Sign up"
                 on_press: root.signUp()
 
-<SignupScreen>
+<SignupScreen>:
     GridLayout:
         cols: 1
         Label:
@@ -34,9 +40,41 @@
             text: "Submit"
             on_press: root.addUser(root.ids.username.text, root.ids.password.text)
 
+<SignupSuccessScreen>:
+    GridLayout:
+        cols: 1
+        Label:
+            text: "Sign up sucessfull!"
+        Button:
+            text: "Go to Login page"
+            on_press: root.go_to_login()
+
+<LoginSuccessScreen>:
+    GridLayout:
+        cols: 1
+        Button:
+            text: "Logout"
+            on_press: root.logout()
+
+        Label:
+            text: "How do you feel?"
+        TextInput:
+            id: userInput
+            hint_text: "Things to try: happy, sad, angry"
+        Button:
+            text: "Press me"
+            on_press: root.getQuote(root.ids.userInput.text)
+        Label:
+            id: labelQuote
+            text: ""
+
 
 <RootWidget>
     LoginScreen:
-        name: "loginScreen"
+        name: "login_Screen"
     SignupScreen:
-        name: "SignupScreen"
+        name: "Signup_Screen"
+    SignupSuccessScreen:
+        name: "Signup_Success_Screen"
+    LoginSuccessScreen:
+        name: "Login_Success_Screen"
